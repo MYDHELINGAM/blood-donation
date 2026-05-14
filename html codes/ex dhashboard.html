@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Dashboard</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --glow-color: #ff9800;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('p1.jpeg'); /* replace with your image */
+      background-size: cover;
+      background-position: center;
+      overflow: auto;
+      color: white;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 90%;
+      backdrop-filter: blur(25px);
+      padding: 20px;
+      border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 152, 0, 0.3);
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+      background: transparent;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #ff9800, #ff5722);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowText 2s infinite alternate;
+      margin-bottom: 10px;
+    }
+
+    @keyframes glowText {
+      from {
+        text-shadow: 0 0 5px rgba(255, 152, 0, 0.2);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(255, 152, 0, 0.8);
+      }
+    }
+
+    h2, h3, p {
+      margin: 10px 0;
+      text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn {
+      padding: 12px 25px;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 15px;
+      border: 2px solid var(--glow-color);
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #ff9800, #e65100);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: 0.5s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      opacity: 1;
+      top: 0;
+      left: 0;
+    }
+
+    .home-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #42a5f5;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .home-btn:hover {
+      background: #1565c0;
+      transform: scale(1.1);
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9); /* Light background */
+      color: black; /* Black text */
+      font-weight: bold; /* Bold text */
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    input:focus {
+      border-color: #ff9800;
+      outline: none;
+      box-shadow: 0 0 10px #ff9800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      color: white;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    th {
+      background: #42a5f5;
+    }
+
+    td:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transition: 0.3s;
+    }
+
+    tr.new-row {
+      animation: fadeInRow 0.5s ease;
+    }
+
+    @keyframes fadeInRow {
+      from {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    canvas {
+      margin-top: 30px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      transition: filter 0.3s ease-in-out;
+    }
+
+    canvas.updated {
+      filter: drop-shadow(0 0 10px #ff9800);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="login.html" class="home-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <h1><i class="fas fa-user-circle"></i> Employee Dashboard</h1>
+    <h2>Welcome, Employee</h2>
+
+    <h3>Add New Record</h3>
+    <input type="text" id="employeeName" placeholder="Employee Name" required>
+    <input type="text" id="skillName" placeholder="Skill" required>
+    <input type="text" id="projectName" placeholder="Project" required>
+    <input type="text" id="certificationName" placeholder="Certification" required>
+    <input type="number" id="trainingProgress" placeholder="Training Progress (%)" required>
+    <input type="text" id="employeeID" placeholder="Employee ID" required>
+    <input type="text" id="projectID" placeholder="Project ID" required>
+    <br>
+    <button onclick="addRecord()" class="btn">Add Record</button>
+
+    <h3>Employee Records</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Skill</th>
+          <th>Project</th>
+          <th>Certification</th>
+          <th>Training (%)</th>
+          <th>Emp ID</th>
+          <th>Proj ID</th>
+        </tr>
+      </thead>
+      <tbody id="recordList"></tbody>
+    </table>
+  </div>
+
+  <script>
+    function addRecord() {
+      const name = document.getElementById("employeeName").value;
+      const skill = document.getElementById("skillName").value;
+      const project = document.getElementById("projectName").value;
+      const certification = document.getElementById("certificationName").value;
+      const progress = parseInt(document.getElementById("trainingProgress").value);
+      const id = document.getElementById("employeeID").value;
+      const projectId = document.getElementById("projectID").value;
+
+      if (name && skill && project && certification && !isNaN(progress) && id && projectId) {
+        const record = { name, skill, project, certification, progress, id, projectId };
+        
+        let employees = JSON.parse(localStorage.getItem("employees")) || [];
+        employees.push(record);
+        localStorage.setItem("employees", JSON.stringify(employees));
+
+        displayRecord(record);
+        alert("Record added successfully!");
+        ["employeeName", "skillName", "projectName", "certificationName", "trainingProgress", "employeeID", "projectID"]
+        .forEach(id => document.getElementById(id).value = "");
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+
+    function displayRecord(record) {
+      const table = document.getElementById("recordList");
+      const newRow = table.insertRow();
+      newRow.classList.add("new-row");
+      newRow.innerHTML = ` 
+        <td>${record.name}</td>
+        <td>${record.skill}</td>
+        <td>${record.project}</td>
+        <td>${record.certification}</td>
+        <td>${record.progress}%</td>
+        <td>${record.id}</td>
+        <td>${record.projectId}</td>
+      `;
+    }
+
+    window.onload = function () {
+      let employees = JSON.parse(localStorage.getItem("employees")) || [];
+      employees.forEach(displayRecord);
+    }
+  </script>
+</body>
+</html>

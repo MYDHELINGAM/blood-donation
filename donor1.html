@@ -1,0 +1,80 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const bloodGroup = document.getElementById('blood-group').value;
+
+            // Clear previous error messages
+            document.getElementById('name-error').innerText = '';
+            document.getElementById('age-error').innerText = '';
+            document.getElementById('blood-group-error').innerText = '';
+
+            let isValid = true;
+
+            if (!name) {
+                document.getElementById('name-error').innerText = 'Please fill out this field.';
+                isValid = false;
+            }
+            if (!age) {
+                document.getElementById('age-error').innerText = 'Please fill out this field.';
+                isValid = false;
+            } else if (age < 16) {
+                document.getElementById('age-error').innerText = 'Age is not eligible. You must be at least 16 years old.';
+                isValid = false;
+            }
+            if (!bloodGroup) {
+                document.getElementById('blood-group-error').innerText = 'Please select a blood group.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Redirect to donor.html
+                location.href = 'donor2.html'; // Change this URL to your desired page
+            }
+
+            return false; // Prevent form submission
+        }
+    </script>
+    <style>
+        select option {
+            width: auto;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen" style="background-image: url('background1.jpeg'); background-size: cover; background-position: center;">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-black">DONOR DETAILS</h1>
+        <form onsubmit="return validateForm()">
+            <div class="mb-4">
+                <label class="block text-black mb-2" for="name">Name</label>
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="name" name="name">
+                <div id="name-error" class="text-red-500 text-sm mt-1"></div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-black mb-2" for="age">Age</label>
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" type="number" id="age" name="age">
+                <div id="age-error" class="text-red-500 text-sm mt-1"></div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-black mb-2" for="blood-group">Blood Group</label>
+                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="blood-group" name="blood-group">
+                    <option disabled selected hidden value="">Select blood group</option>
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+                </select>
+                <div id="blood-group-error" class="text-red-500 text-sm mt-1"></div>
+            </div>
+            <button type="button" onclick="validateForm()" class="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">REGISTER</button>
+        </form>
+    </div>
+</body>
+</html>

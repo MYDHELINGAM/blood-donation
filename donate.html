@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Custom Tailwind animations
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        fadeIn: "fadeIn 1s ease-out",
+                        zoomIn: "zoomIn 0.7s ease-out",
+                        shake: "shake 0.4s ease-in-out"
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 }
+                        },
+                        zoomIn: {
+                            '0%': { opacity: 0, transform: 'scale(0.9)' },
+                            '100%': { opacity: 1, transform: 'scale(1)' }
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '20%, 60%': { transform: 'translateX(-5px)' },
+                            '40%, 80%': { transform: 'translateX(5px)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const age = parseInt(document.getElementById('age').value);
+            const bloodGroup = document.getElementById('blood-group').value;
+            const phone = document.getElementById('phone').value.trim();
+            const form = document.querySelector('form');
+
+            // Clear previous error messages
+            document.getElementById('name-error').innerText = '';
+            document.getElementById('age-error').innerText = '';
+            document.getElementById('blood-group-error').innerText = '';
+            document.getElementById('phone-error').innerText = '';
+
+            let isValid = true;
+
+            if (!name) {
+                document.getElementById('name-error').innerText = 'Please enter your name.';
+                isValid = false;
+            }
+
+            if (!age) {
+                document.getElementById('age-error').innerText = 'Please enter your age.';
+                isValid = false;
+            } else if (age < 16) {
+                document.getElementById('age-error').innerText = 'You must be at least 16 years old.';
+                isValid = false;
+            }
+
+            if (!bloodGroup) {
+                document.getElementById('blood-group-error').innerText = 'Please select a blood group.';
+                isValid = false;
+            }
+
+            if (!phone) {
+                document.getElementById('phone-error').innerText = 'Please enter your phone number.';
+                isValid = false;
+            } else if (!/^\d{10}$/.test(phone)) {
+                document.getElementById('phone-error').innerText = 'Phone number must be 10 digits.';
+                isValid = false;
+            }
+
+            // Animate shake if invalid
+            if (!isValid) {
+                form.classList.remove('animate-shake');
+                void form.offsetWidth;
+                form.classList.add('animate-shake');
+            } else {
+                location.href = 'thankyou.html';
+            }
+
+            return false;
+        }
+    </script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('bg2.jpg');">
+    <div class="animate-zoomIn bg-blue-600 bg-opacity-80 p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-black text-center">DONOR DETAILS</h1>
+        <form onsubmit="return validateForm()" class="transition-all duration-300">
+            <!-- Name -->
+            <div class="mb-4">
+                <label class="block font-bold text-black mb-2" for="name">Name</label>
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300" type="text" id="name" name="name">
+                <div id="name-error" class="text-red-500 text-sm mt-1"></div>
+            </div>
+
+            <!-- Age -->
+            <div class="mb-4">
+                <label class="block font-bold text-black mb-2" for="age">Age</label>
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300" type="number" id="age" name="age">
+                <div id="age-error" class="text-red-500 text-sm mt-1"></div>
+            </div>
+
+            <!-- Blood Group -->
+            <div class="mb-4">
+                <label class="block font-bold text-black mb-2" for="blood-group">Blood Group</label>
+                <select class="w-full px-3 py-2 border border-gray-300 rounded-md transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300" id="blood-group" name="blood-group">
+                    <option disabled selected hidden value="">Select blood group</option>
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+                </select>
+                <div id="blood-group-error" class="text-red-500 text-sm mt-1"></div>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-6">
+                <label class="block font-bold text-black mb-2" for="phone">Phone</label>
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300" type="tel" id="phone" name="phone">
+                <div id="phone-error" class="text-red-500 text-sm mt-1"></div>
+            </div>
+
+            <button type="submit" class="w-full bg-green-700 text-white py-2 px-4 rounded-md transition-all duration-300 hover:bg-green-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500">
+                REGISTER
+            </button>
+        </form>
+    </div>
+</body>
+</html>

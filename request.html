@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Request Blood</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Dummy donor data
+    const donors = [
+      { name: 'Arun', age: 25, phone: '9876543210', blood: 'A+' },
+      { name: 'Priya', age: 30, phone: '9876501234', blood: 'B+' },
+      { name: 'Rahul', age: 22, phone: '9123456780', blood: 'O+' },
+      { name: 'Meena', age: 28, phone: '9988776655', blood: 'A+' },
+      { name: 'Karthik', age: 35, phone: '9123098765', blood: 'AB-' }
+    ];
+
+    function searchDonors() {
+      const group = document.getElementById('blood-group').value;
+      const resultsBody = document.getElementById('results-body');
+      resultsBody.innerHTML = ''; // Clear previous results
+
+      const filtered = donors.filter(d => d.blood === group);
+
+      if (filtered.length === 0) {
+        resultsBody.innerHTML = '<tr><td colspan="4" class="text-center text-red-600 py-2">No matching donors found</td></tr>';
+      } else {
+        filtered.forEach(donor => {
+          const row = `
+            <tr class="border-b">
+              <td class="px-4 py-2">${donor.name}</td>
+              <td class="px-4 py-2">${donor.age}</td>
+              <td class="px-4 py-2">${donor.phone}</td>
+              <td class="px-4 py-2">${donor.blood}</td>
+            </tr>
+          `;
+          resultsBody.innerHTML += row;
+        });
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-cover bg-center p-10" style="background-image: url('bg3.jpg');">
+  <div class="max-w-3xl mx-auto bg-white bg-opacity-70 rounded-lg p-8 shadow-lg">
+<div class="mb-4">
+  <button onclick="location.href='index.html'" class="bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-gray-900">
+    🏠
+  </button>
+</div>
+
+    <h1 class="text-2xl font-bold text-center text-black mb-6">REQUEST BLOOD</h1>
+
+    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
+      <select id="blood-group" class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-red-400">
+        <option value="" disabled selected>Select Blood Group</option>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>O+</option>
+        <option>O-</option>
+        <option>AB+</option>
+        <option>AB-</option>
+      </select>
+      <button onclick="searchDonors()" class="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition">
+        Search
+      </button>
+    </div>
+
+    <table class="w-full table-auto bg-white rounded shadow overflow-hidden">
+      <thead class="bg-red-600 text-white">
+        <tr>
+          <th class="px-4 py-2 text-left">Name</th>
+          <th class="px-4 py-2 text-left">Age</th>
+          <th class="px-4 py-2 text-left">Phone</th>
+          <th class="px-4 py-2 text-left">Blood Group</th>
+        </tr>
+      </thead>
+      <tbody id="results-body" class="text-black">
+        <!-- Results will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

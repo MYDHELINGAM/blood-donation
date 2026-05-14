@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Skill Tracking System - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('p3.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(0, 0, 0, 0.2), rgba(255, 140, 0, 0.1));
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      max-width: 650px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      z-index: 1;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .container:hover {
+      transform: perspective(1000px) rotateX(5deg) translateY(-5px);
+      box-shadow: 0px 10px 40px rgba(255, 136, 0, 0.6);
+    }
+
+    .icon {
+      width: 70px;
+      margin-bottom: 15px;
+      animation: float 2.5s ease-in-out infinite;
+      filter: drop-shadow(0px 0px 6px rgba(255, 255, 255, 0.4));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      color: #ffffff;
+      margin-bottom: 20px;
+      font-size: 28px;
+      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    p {
+      font-size: 18px;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(45deg, #ff9800, #e65100);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: 0.3s ease;
+      box-shadow: 0px 5px 15px rgba(255, 136, 0, 0.3);
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #e65100, #ff5722);
+      transform: scale(1.1);
+      box-shadow: 0px 10px 25px rgba(255, 136, 0, 0.6);
+    }
+
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.06;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="particles"></div>
+
+  <div class="container">
+    <!-- SVG Icon: Skill Graph or Gear Icon -->
+    <svg class="icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 1.75a2 2 0 0 1 2 2V5a7.001 7.001 0 0 1 6.91 6h1.34a1 1 0 0 1 0 2h-1.34a7.001 7.001 0 0 1-6.91 6v1.25a2 2 0 0 1-4 0V19a7.001 7.001 0 0 1-6.91-6H1.75a1 1 0 0 1 0-2H3.09A7.001 7.001 0 0 1 10 5V3.75a2 2 0 0 1 2-2zm0 4a5 5 0 1 0 5 5 5.006 5.006 0 0 0-5-5z"/>
+    </svg>
+
+    <h1>Welcome to the Employee Skill Tracking System</h1>
+    <p>Manage your skills, track training progress, and stay updated with your projects.</p>
+    <a href="login.html" class="btn">Start</a>
+  </div>
+</body>
+</html>

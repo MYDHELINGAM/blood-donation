@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Skill Tracking System - Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('P2.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      width: 350px;
+      text-align: center;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      animation: slideFadeIn 1.2s ease-out forwards;
+      transform: translateY(20px);
+      opacity: 0;
+      box-shadow: 0 0 0 transparent;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px rgba(255, 136, 0, 0.5);
+    }
+
+    @keyframes slideFadeIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h2 {
+      color: #222;
+      font-weight: bold;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in 0.4s forwards;
+      opacity: 0;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #222;
+      font-weight: bold;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .input-field:nth-child(1) { animation-delay: 0.6s; }
+    .input-field:nth-child(2) { animation-delay: 0.8s; }
+
+    .input-field:focus {
+      box-shadow: 0 0 10px rgba(255, 136, 0, 0.7);
+      border: 2px solid #ff9800;
+    }
+
+    .input-field::placeholder {
+      color: #555;
+      font-weight: normal;
+    }
+
+    .role-selection {
+      margin: 15px 0;
+      color: #222;
+      font-size: 15px;
+      font-weight: bold;
+      animation: fadeIn 1s ease 1s forwards;
+      opacity: 0;
+    }
+
+    .role-selection label {
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, #ff9800, #e65100);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0px 0px 15px rgba(255, 136, 0, 0.4);
+      margin-top: 10px;
+      animation: fadeInUp 1s ease 1.2s forwards;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #e65100, #ff5722);
+      transform: scale(1.07);
+      box-shadow: 0px 0px 25px rgba(255, 136, 0, 0.8);
+    }
+
+    .btn:active {
+      transform: scale(1.02);
+      box-shadow: 0px 0px 20px rgba(255, 136, 0, 0.8);
+    }
+
+    p {
+      margin-top: 15px;
+      color: #222;
+      font-size: 14px;
+      font-weight: bold;
+      animation: fadeIn 1s ease 1.4s forwards;
+      opacity: 0;
+    }
+
+    a {
+      color: #ff5722;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form onsubmit="event.preventDefault(); validateLogin();">
+      <input type="email" id="email" class="input-field" placeholder="Email" required />
+      <input type="password" id="password" class="input-field" placeholder="Password" required />
+
+      <div class="role-selection">
+        <label><input type="radio" name="userType" value="employee" checked /> Employee</label>
+        <label><input type="radio" name="userType" value="hr" /> HR</label>
+      </div>
+
+      <button type="submit" class="btn">Login</button>
+    </form>
+    <p>Don't have an account? <a href="register.html">Register</a></p>
+  </div>
+
+  <script>
+    function validateLogin() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const userType = document.querySelector('input[name="userType"]:checked').value;
+
+      const users = JSON.parse(localStorage.getItem("users")) || {};
+      const hrUsers = JSON.parse(localStorage.getItem("hrUsers")) || { "hr@example.com": "hr123" };
+
+      if (userType === "employee") {
+        if (users[email] && users[email] === password) {
+          alert("Employee Login successful!");
+          localStorage.setItem("isHR", "false");
+          window.location.href = "ex dhashboard.html";
+        } else {
+          alert("Invalid Employee email or password. Try again.");
+        }
+      } else {
+        if (hrUsers[email] && hrUsers[email] === password) {
+          alert("HR Login successful!");
+          localStorage.setItem("isHR", "true");
+          window.location.href = "ex hrdhashboard.html";
+        } else {
+          alert("Invalid HR email or password.");
+        }
+      }
+    }
+  </script>
+</body>
+</html>

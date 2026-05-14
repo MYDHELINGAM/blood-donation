@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Donation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            fadeIn: 'fadeIn 1.5s ease-out forwards',
+            zoomIn: 'zoomIn 0.8s ease-out forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0, transform: 'translateY(-10px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' }
+            },
+            zoomIn: {
+              '0%': { opacity: 0, transform: 'scale(0.9)' },
+              '100%': { opacity: 1, transform: 'scale(1)' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .tilt-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease;
+    }
+    .tilt-3d:hover {
+      transform: perspective(1000px) rotateX(6deg) rotateY(-6deg);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-3d {
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    .btn-3d:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('bg1.jpg');">
+
+  <div class="tilt-3d bg-blue-800 bg-opacity-80 text-center p-16 rounded-xl shadow-2xl w-full max-w-4xl animate-zoomIn">
+
+    <h1 class="text-4xl font-bold text-white mb-2 animate-fadeIn delay-[200ms]">WELCOME</h1>
+    <h2 class="text-4xl font-bold text-white mb-2 animate-fadeIn delay-[400ms]">TO</h2>
+    <h3 class="text-4xl font-bold text-white mb-8 animate-fadeIn delay-[600ms]">BLOOD DONATION MANAGEMENT SYSTEM</h3>
+
+    <div class="flex flex-col items-center space-y-4">
+      <button onclick="location.href='donate.html'"
+        class="btn-3d bg-green-500 text-black px-8 py-2 rounded-md hover:bg-sky-200">
+        DONATE
+      </button>
+      <button onclick="location.href='request.html'"
+        class="btn-3d bg-green-500 text-black px-8 py-2 rounded-md hover:bg-sky-200">
+        REQUEST
+      </button>
+    </div>
+
+  </div>
+
+</body>
+</html>
